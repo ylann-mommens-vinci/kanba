@@ -44,3 +44,14 @@ next-env.d.ts
 .idea/
 *.swp
 *.swo
+
+# MacOS
+.DS_Store
+
+# Temporary files & folders
+/.temp/
+*.tmp
+
+#Claude AI & other AI tools
+.claude/
+.mcp.json

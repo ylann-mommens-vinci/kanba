@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useUser } from '@/components/user-provider';
 import { toast } from 'sonner';
-import { Plus, FolderOpen, Calendar, Users, Crown, Bell, CheckSquare, User, Sun, Moon } from 'lucide-react';
+import { Plus, FolderOpen, Calendar, Users, Bell, CheckSquare, User, Sun, Moon } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useTheme } from 'next-themes';
@@ -152,11 +152,7 @@ export default function DashboardPage() {
     router.push('/');
   };
 
-  const canCreateProject = () => {
-    if (!profile) return false;
-    const ownedProjects = projects.filter(p => p.user_id === user?.id);
-    return profile.subscription_status === 'pro' || ownedProjects.length < 1;
-  };
+  const canCreateProject = () => true;
 
   const getProjectRole = (project: Project) => {
     if (project.user_id === user?.id) return 'owner';
@@ -196,18 +192,6 @@ export default function DashboardPage() {
           
         </div>
         <div className="flex items-center space-x-4">
-          <Badge variant={profile?.subscription_status === 'pro' ? 'default' : 'secondary'}>
-            {profile?.subscription_status === 'pro' ? (
-              <><Crown className="h-3 w-3 mr-1" /> Pro</>
-            ) : (
-              'Free'
-            )}
-          </Badge>
-          {profile?.subscription_status !== 'pro' && (
-            <Button size='xs' asChild className='text-xs'>
-              <Link href="/dashboard/billing">Upgrade to Pro</Link>
-            </Button>
-          )}
         </div>
       </div>
       {/* Stats */}
@@ -235,14 +219,6 @@ export default function DashboardPage() {
           </CardHeader>
         </Card>
         
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between ">
-            <CardTitle className="text-sm font-medium">Subscription</CardTitle>
-            <div className="text-sm font-bold capitalize">
-              {profile?.subscription_status || 'Free'}
-            </div>            
-          </CardHeader>
-        </Card>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Projects */}
@@ -260,18 +236,6 @@ export default function DashboardPage() {
             </Button>
           </div>
 
-          {!canCreateProject() && (
-            <Card className="border-amber-200 bg-amber-50 dark:bg-amber-950/10">
-              <CardContent className="pt-6">
-                <p className="text-sm text-amber-800 dark:text-amber-200">
-                  You&apos;ve reached the free plan limit of 1 project. 
-                  <Link href="/dashboard/billing" className="font-medium underline ml-1">
-                    Upgrade to Pro
-                  </Link> for unlimited projects.
-                </p>
-              </CardContent>
-            </Card>
-          )}
 
           {projects.length === 0 ? (
             <Card className="text-center py-12">
@@ -395,12 +359,6 @@ export default function DashboardPage() {
                 <Link href="/dashboard/projects/new">
                   <Plus className="h-4 w-4 mr-2" />
                   Create New Project
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link href="/dashboard/billing">
-                  <Crown className="h-4 w-4 mr-2" />
-                  Manage Subscription
                 </Link>
               </Button>
             </CardContent>
