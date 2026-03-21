@@ -932,6 +932,7 @@ export default function ProjectPage() {
         <TabsContent value="team">
           <TeamManagement 
             projectId={project?.id}
+            userSubscriptionStatus={profile?.subscription_status || 'free'}
             isProjectOwner={isProjectOwner}
           />
         </TabsContent>

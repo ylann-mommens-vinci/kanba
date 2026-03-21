@@ -8,6 +8,7 @@ import {
   BarChartIcon,
   SettingsIcon,
   HelpCircleIcon,
+  CreditCardIcon,
   PlusCircleIcon,
   LogOutIcon,
   UserCircleIcon,
@@ -97,6 +98,7 @@ const menuItems = [
   { title: "AI Planner (soon)", url: "/dashboard/integrations", icon: Brain, disabled: true },
   { title: "Meetings (soon)", url: "/dashboard/integrations", icon: Calendar, disabled: true },
   { title: "Settings", url: "/dashboard/settings", icon: SettingsIcon },
+  { title: "Billing", url: "/dashboard/billing", icon: CreditCardIcon },
 ]
 
 export function AppSidebar({ onSignOut, onProjectUpdate }: AppSidebarProps) {
@@ -340,6 +342,11 @@ export function AppSidebar({ onSignOut, onProjectUpdate }: AppSidebarProps) {
             <DropdownMenuItem onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
               {theme === 'dark' ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
               Toggle Theme
+                </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/billing">
+                <CreditCardIcon className="h-4 w-4 mr-2" /> Billing
+              </Link>
                 </DropdownMenuItem>
               <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut} className="text-red-600">

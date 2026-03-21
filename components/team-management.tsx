@@ -62,10 +62,11 @@ interface ProjectMember {
 
 interface TeamManagementProps {
   projectId: string;
+  userSubscriptionStatus: 'free' | 'pro' | null;
   isProjectOwner: boolean;
 }
 
-export function TeamManagement({ projectId, isProjectOwner }: TeamManagementProps) {
+export function TeamManagement({ projectId, userSubscriptionStatus, isProjectOwner }: TeamManagementProps) {
   const [members, setMembers] = useState<ProjectMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);

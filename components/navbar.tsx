@@ -21,6 +21,7 @@ import {
   User, 
   Settings, 
   LogOut,
+  CreditCard,
   KanbanIcon
 } from 'lucide-react';
 import { Badge } from './ui/badge';
@@ -128,6 +129,12 @@ export function Navbar({ user, onSignOut, loading = false }: NavbarProps) {
                       <Link href="/dashboard">
                         <Settings className="mr-2 h-4 w-4" />
                         Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard/billing">
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Billing
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
